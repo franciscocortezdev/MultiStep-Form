@@ -1,9 +1,10 @@
-import React from 'react'
+import React, {useRef, useState} from 'react'
 import { Formik } from 'formik';
 import Select from 'react-select'
+import Switch from '@mui/material/Switch';
 
 export default function Form() {
-
+ 
 
   const options = [
     { value: 1, label: 'Chocolate' },
@@ -17,14 +18,16 @@ export default function Form() {
     <div>
      <h1>Anywhere in your app!</h1>
      <Formik
-       initialValues={{ email: '', password: '', modulo: null }}
+       initialValues={{ email: '', password: '', modulo: null, activo: false }}
        validate={values => {
          const errors = {};
          if (!values.email) {
            errors.email = 'Requerido';
+                     
          }
          if (values.modulo === null) {
           errors.modulo = 'Debe elegir un modulo';
+
         }
          return errors;
        }}
@@ -54,6 +57,7 @@ export default function Form() {
              onBlur={handleBlur}
              value={values.email}
              />
+           
            {errors.email && touched.email && errors.email}
           </div>
           <div>
@@ -67,7 +71,7 @@ export default function Form() {
              />
            {errors.password && touched.password && errors.password}
           </div>
-          {values.modulo}
+        
 
           <Select 
           name='modulo'
@@ -79,9 +83,18 @@ export default function Form() {
           onBlur={()=>{
             setFieldTouched('modulo');
           }}
+          
           />
           {errors.modulo && touched.modulo && errors.modulo}
           
+
+          <Switch 
+          checked={values.activo}
+          onChange={act=>{
+            setFieldValue('activo', act.target.checked)
+          }}
+          />
+
            <button type="submit" >
              Submit
            </button>
