@@ -56,6 +56,7 @@ export default function Form() {
              onChange={handleChange}
              onBlur={handleBlur}
              value={values.email}
+             style={errors.email && touched.email ? {borderColor: 'red'} : {}}
              />
            
            {errors.email && touched.email && errors.email}
@@ -83,7 +84,10 @@ export default function Form() {
           onBlur={()=>{
             setFieldTouched('modulo');
           }}
-          
+          styles={{
+            control: (provided, state) => ( errors.modulo && touched.modulo ? { ...provided, borderColor: 'red'}
+            : provided )
+          }}
           />
           {errors.modulo && touched.modulo && errors.modulo}
           
