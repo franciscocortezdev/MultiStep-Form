@@ -3,7 +3,7 @@ import {Typography, Grid, TextField, FormControlLabel, Checkbox} from '@mui/mate
 
 
 
-export default function PaymentForm() {
+export default function FormContacto() {
   return (
 
 

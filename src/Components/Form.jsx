@@ -1,5 +1,4 @@
 import React, {useState} from 'react'
-import ShoppingForm from './ShoppingForm';
 import {
   Typography, 
   Container, 
@@ -9,10 +8,11 @@ import {
   StepLabel,
   Box,
   Button
-
+  
 } from '@mui/material';
-import PaymentForm from './PaymentForm';
-import ReviewForm from './ReviewForm';
+import FormDPersonales from './FormDPersonales';
+import FormContacto from './FormContacto';
+import FormInfoLaboral from './FormInfoLaboral';
 import { useFormik } from 'formik';
 
 
@@ -42,11 +42,11 @@ export default function Form() {
     console.log('values', values)
     switch (step) {
       case 0:
-        return <ShoppingForm values={values} handleChange={handleChange} handleSubmit={handleSubmit}/>;
+        return <FormDPersonales values={values} handleChange={handleChange} handleSubmit={handleSubmit}/>;
       case 1:
-        return <PaymentForm values={values} handleChange={handleChange} handleSubmit={handleSubmit}/>;
+        return <FormContacto values={values} handleChange={handleChange} handleSubmit={handleSubmit}/>;
       case 2:
-        return <ReviewForm values={values} handleChange={handleChange} handleSubmit={handleSubmit}/>;
+        return <FormInfoLaboral values={values} handleChange={handleChange} handleSubmit={handleSubmit}/>;
       default:
         throw new Error('Unknown step');
     }

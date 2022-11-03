@@ -4,7 +4,7 @@ import { Grid, TextField} from '@mui/material'
 
 
 
-export default function ShoppingForm({values, handleChange, handleSubmit}) {
+export default function FormDPersonales({values, handleChange, handleSubmit}) {
 
 
 

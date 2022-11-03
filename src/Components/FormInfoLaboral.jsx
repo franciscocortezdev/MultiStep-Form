@@ -2,7 +2,7 @@ import React from 'react'
 import {Typography, Grid, TextField} from '@mui/material';
 
 
-export default function ReviewForm() {
+export default function FormInfoLaboral() {
 
 
 
