@@ -1,5 +1,5 @@
 import React from 'react'
-import { Grid, TextField} from '@mui/material'
+import { Grid, TextField, InputLabel} from '@mui/material'
 
 
 
@@ -11,8 +11,7 @@ export default function FormDPersonales({values, handleChange, handleSubmit}) {
   return (
     <>
 
-
-      <Grid container spacing={3}>
+      <Grid container spacing={4}>
         <Grid item xs={12} sm={6}>
           <TextField
             name="Nombre"
@@ -40,10 +39,20 @@ export default function FormDPersonales({values, handleChange, handleSubmit}) {
             name="Direccion"
             label="Direccion"
             fullWidth
-            autoComplete="shipping address-line1"
             variant="standard"
             value={values.Direccion}
             onChange={handleChange}
+          />
+        </Grid>
+        <Grid item xs={12}>
+          <InputLabel >Edad</InputLabel>
+          <TextField
+            name="Edad"
+            fullWidth
+            variant="standard"
+            value={values.Edad}
+            onChange={handleChange}
+            type='date'
           />
         </Grid>
        
