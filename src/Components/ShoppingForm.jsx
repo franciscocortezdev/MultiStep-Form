@@ -1,40 +1,13 @@
 import React from 'react'
 import {Typography, Grid, TextField} from '@mui/material'
-import { useFormik } from 'formik';
-export default function ShoppingForm() {
 
 
 
-  const Formulario = useFormik({
-    initialValues: { 
-      firstName: '',
-      lastName: '',
-      address1: '',
-      address2: '', 
-      city: '',
-      state:'',
-      zip: '',
-      country:''
-    },
-    validate: (values) => {
-      const errors = {};
-    //   if (!values.email) {
-    //     errors.email = 'Requerido';
-                  
-    //   }
-    //   if (values.modulo === null) {
-    //    errors.modulo = 'Debe elegir un modulo';
 
-    //  }
-      return errors;
-    },
-    onSubmit: (values) => {
-      console.log(values)
+export default function ShoppingForm({values, handleChange, handleSubmit}) {
 
-    }
-  })
 
-  
+
   return (
     <>
 
@@ -45,32 +18,38 @@ export default function ShoppingForm() {
       <Grid container spacing={3}>
         <Grid item xs={12} sm={6}>
           <TextField
-            required
+            
             name="firstName"
             label="First name"
             fullWidth
             autoComplete="given-name"
             variant="standard"
+            value={values.firstName}
+            onChange={handleChange}
           />
         </Grid>
         <Grid item xs={12} sm={6}>
           <TextField
-            required
+            
             name="lastName"
             label="Last name"
             fullWidth
             autoComplete="family-name"
             variant="standard"
+            value={values.lastName}
+            onChange={handleChange}
           />
         </Grid>
         <Grid item xs={12}>
           <TextField
-            required
+            
             name="address1"
             label="Address line 1"
             fullWidth
             autoComplete="shipping address-line1"
             variant="standard"
+            value={values.address1}
+            onChange={handleChange}
           />
         </Grid>
         <Grid item xs={12}>
@@ -80,6 +59,8 @@ export default function ShoppingForm() {
             fullWidth
             autoComplete="shipping address-line2"
             variant="standard"
+            value={values.address2}
+            onChange={handleChange}
           />
         </Grid>
         <Grid item xs={12} sm={6}>
@@ -90,6 +71,8 @@ export default function ShoppingForm() {
             fullWidth
             autoComplete="shipping address-level2"
             variant="standard"
+            value={values.city}
+            onChange={handleChange}
           />
         </Grid>
         <Grid item xs={12} sm={6}>
@@ -98,27 +81,32 @@ export default function ShoppingForm() {
             label="State/Province/Region"
             fullWidth
             variant="standard"
+            value={values.state}
+            onChange={handleChange}
           />
         </Grid>
         <Grid item xs={12} sm={6}>
           <TextField
-            required
-            id="zip"
+
             name="zip"
             label="Zip / Postal code"
             fullWidth
             autoComplete="shipping postal-code"
             variant="standard"
+            value={values.zip}
+            onChange={handleChange}
           />
         </Grid>
         <Grid item xs={12} sm={6}>
           <TextField
-            required
+            
             name="country"
             label="Country"
             fullWidth
             autoComplete="shipping country"
             variant="standard"
+            value={values.country}
+            onChange={handleChange}
           />
         </Grid>
         

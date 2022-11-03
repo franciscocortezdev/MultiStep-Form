@@ -1,8 +1,6 @@
 import React, {useState} from 'react'
 import ShoppingForm from './ShoppingForm';
 import {
-  AppBar,
-  Toolbar,
   Typography, 
   Container, 
   Paper, 
@@ -15,6 +13,8 @@ import {
 } from '@mui/material';
 import PaymentForm from './PaymentForm';
 import ReviewForm from './ReviewForm';
+import { useFormik } from 'formik';
+
 
 export default function Form() {
   const [activeStep, setActiveStep] = useState(0);
@@ -35,18 +35,52 @@ export default function Form() {
   }
 
 
-  function getStepContent(step) {
+  
+
+
+  function getStepContent(step, values, handleChange, handleSubmit) {
+    console.log('values', values)
     switch (step) {
       case 0:
-        return <ShoppingForm />;
+        return <ShoppingForm values={values} handleChange={handleChange} handleSubmit={handleSubmit}/>;
       case 1:
-        return <PaymentForm />;
+        return <PaymentForm values={values} handleChange={handleChange} handleSubmit={handleSubmit}/>;
       case 2:
-        return <ReviewForm />;
+        return <ReviewForm values={values} handleChange={handleChange} handleSubmit={handleSubmit}/>;
       default:
         throw new Error('Unknown step');
     }
   }
+
+
+  const Formulario = useFormik({
+    initialValues: { 
+      firstName: '',
+      lastName: '',
+      address1: '',
+      address2: '', 
+      city: '',
+      state:'',
+      zip: '',
+      country:''
+    },
+    validate: (values) => {
+      const errors = {};
+    //   if (!values.email) {
+    //     errors.email = 'Requerido';
+                  
+    //   }
+    //   if (values.modulo === null) {
+    //    errors.modulo = 'Debe elegir un modulo';
+
+    //  }
+      return errors;
+    },
+    onSubmit: (values) => {
+      console.log(values)
+
+    }
+  })
 
   return (
     <>
@@ -67,9 +101,9 @@ export default function Form() {
           </Stepper>
           
             
-              {getStepContent(activeStep)}
+              {getStepContent(activeStep, Formulario.values, Formulario.handleChange, Formulario.handleSubmit)}
 
-              
+
               <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
                 {activeStep !== 0 && (
                   <Button onClick={handleBack} sx={{ mt: 3, ml: 1 }}>
