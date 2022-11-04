@@ -9,23 +9,40 @@ export default function FormInfoLaboral() {
 
   return (
     <>
-      <Typography variant="h6" gutterBottom>
-        Order summary
-      </Typography>
-     
+
       <Grid container spacing={2}>
         <Grid item xs={12} sm={6}>
           <TextField
-            required
-            id="cardName"
-            label="Name on card"
+            name='Profesion'
+            label="Profesion"
             fullWidth
-            autoComplete="cc-name"
             variant="standard"
           />
-
-
+          
         </Grid>
+        
+        <Grid item xs={12} sm={6}>
+          <TextField
+            name='TelefonoTrabajo'
+            label="Telefono del trabajo"
+            fullWidth
+            variant="standard"
+            type='number'
+          />
+          
+        </Grid>
+
+        <Grid item xs={12}>
+          <TextField
+            name='DireccionTrabajo'
+            label="Direccion del trabajo"
+            fullWidth
+            variant="standard"
+  
+          />
+          
+        </Grid>
+        
       </Grid>
     </>
   )
