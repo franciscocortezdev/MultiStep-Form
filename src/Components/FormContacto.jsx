@@ -1,9 +1,9 @@
 import React from 'react'
-import { Grid, TextField} from '@mui/material';
+import { Grid, TextField, Switch, InputLabel} from '@mui/material';
 
 
 
-export default function FormContacto({values, handleChange, handleSubmit, errors, touched, handleBlur}) {
+export default function FormContacto({values, handleChange, errors, touched, handleBlur, setFieldValue,setFieldTouched}) {
   return (
     <>
 
@@ -22,6 +22,15 @@ export default function FormContacto({values, handleChange, handleSubmit, errors
             helperText={touched.Telefono && errors.Telefono}
             onBlur={handleBlur}
           />
+        </Grid>
+        <Grid item xs={12} md={6}>
+        <InputLabel >¿Tiene Whatsapp?</InputLabel>
+        <Switch 
+        checked={values.tieneWhatsapp} 
+        onChange={act=>{
+          setFieldValue('tieneWhatsapp', act.target.checked)
+        }}
+        />
         </Grid>
         <Grid item xs={12}>
           <TextField
