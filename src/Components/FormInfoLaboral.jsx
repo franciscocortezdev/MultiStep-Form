@@ -2,7 +2,7 @@ import React from 'react'
 import { Grid, TextField} from '@mui/material';
 
 
-export default function FormInfoLaboral({values, handleChange, handleSubmit, errors, touched, handleBlur}) {
+export default function FormInfoLaboral({values, handleChange, errors, touched, handleBlur, setFieldValue,setFieldTouched}) {
 
 
 
