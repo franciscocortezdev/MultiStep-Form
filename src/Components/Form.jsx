@@ -32,15 +32,31 @@ export default function Form() {
 
   
 
-  function getStepContent(step, values, handleChange, handleSubmit, errors, touched, handleBlur) {
+  function getStepContent(step, values, handleChange, handleSubmit, errors, touched, handleBlur, setFieldValue, setFieldTouched) {
    
     switch (step) {
       case 0:
-        return <FormDPersonales values={values} handleChange={handleChange} handleSubmit={handleSubmit} errors={errors} touched={touched} handleBlur={handleBlur}/>;
+        return <FormDPersonales 
+        values={values} handleChange={handleChange} 
+        handleSubmit={handleSubmit} errors={errors} 
+        touched={touched} handleBlur={handleBlur}
+        setFieldValue={setFieldValue}
+        setFieldTouched={setFieldTouched}
+        />
       case 1:
-        return <FormContacto values={values} handleChange={handleChange} handleSubmit={handleSubmit} errors={errors} touched={touched}/>;
+        return <FormContacto values={values} handleChange={handleChange} 
+        handleSubmit={handleSubmit} errors={errors} 
+        touched={touched} handleBlur={handleBlur}
+        setFieldValue={setFieldValue}
+        setFieldTouched={setFieldTouched}
+        />
       case 2:
-        return <FormInfoLaboral values={values} handleChange={handleChange} handleSubmit={handleSubmit} errors={errors} touched={touched}/>;
+        return <FormInfoLaboral values={values} handleChange={handleChange} 
+        handleSubmit={handleSubmit} errors={errors} 
+        touched={touched} handleBlur={handleBlur}
+        setFieldValue={setFieldValue}
+        setFieldTouched={setFieldTouched}
+        />
       default:
         throw new Error('Unknown step');
     }
@@ -57,9 +73,12 @@ export default function Form() {
       Correo:'',
       Profesion: '',
       TelefonoTrabajo: '',
-      DireccionTrabajo: ''
+      DireccionTrabajo: '',
+      estadoCivil: null,
+      tieneWhatsapp: false
     },
     validate: (values) => {
+      
       const errors = {};
       if (!values.Nombre) {
         errors.Nombre = 'El nombre es requerido';
@@ -68,20 +87,30 @@ export default function Form() {
       if (!values.Edad){
         errors.Edad = 'Fecha de nacimiento requerida'
       }
+      if(activeStep === 1){
 
-      if(!values.Telefono){
-        errors.Telefono = 'Telefono requerido'
+        if(!values.Telefono){
+          errors.Telefono = 'Telefono requerido'
+        }
+  
       }
 
-      if(!values.Profesion){
-        errors.Profesion = 'Profesion requerida'
+      if(activeStep === 2){
+  
+        if(!values.Profesion){
+          errors.Profesion = 'Profesion requerida'
+        }
       }
-     
+
+      if(values.estadoCivil === null){
+        errors.estadoCivil = 'Estado civil requerido'
+      }
       return errors;
     },
     onSubmit: (values) => {
+      
       if (activeStep === 2){
-        console.log('enviado')
+        //Enviar datos
       }else{
         handleNext()
       }
@@ -110,7 +139,7 @@ export default function Form() {
           
               <form onSubmit={Formulario.handleSubmit}>
 
-              {getStepContent(activeStep, Formulario.values, Formulario.handleChange, Formulario.handleSubmit, Formulario.errors, Formulario.touched, Formulario.handleBlur)}
+              {getStepContent(activeStep, Formulario.values, Formulario.handleChange, Formulario.handleSubmit, Formulario.errors, Formulario.touched, Formulario.handleBlur, Formulario.setFieldValue, Formulario.setFieldTouched)}
 
 
 
