@@ -2,7 +2,7 @@ import React from 'react'
 import { Grid, TextField} from '@mui/material';
 
 
-export default function FormInfoLaboral({values, handleChange, handleSubmit}) {
+export default function FormInfoLaboral({values, handleChange, handleSubmit, errors, touched, handleBlur}) {
 
 
 
@@ -19,6 +19,9 @@ export default function FormInfoLaboral({values, handleChange, handleSubmit}) {
             variant="standard"
             value={values.Profesion}
             onChange={handleChange}
+            error={touched.Profesion && Boolean(errors.Profesion)}
+            helperText={touched.Profesion && errors.Profesion}
+            onBlur={handleBlur}
           />
           
         </Grid>
@@ -32,6 +35,9 @@ export default function FormInfoLaboral({values, handleChange, handleSubmit}) {
             type='number'
             value={values.TelefonoTrabajo}
             onChange={handleChange}
+            error={touched.TelefonoTrabajo && Boolean(errors.TelefonoTrabajo)}
+            helperText={touched.TelefonoTrabajo && errors.TelefonoTrabajo}
+            onBlur={handleBlur}
           />
           
         </Grid>
@@ -44,6 +50,9 @@ export default function FormInfoLaboral({values, handleChange, handleSubmit}) {
             variant="standard"
             value={values.DireccionTrabajo}
             onChange={handleChange}
+            error={touched.DireccionTrabajo && Boolean(errors.DireccionTrabajo)}
+            helperText={touched.DireccionTrabajo && errors.DireccionTrabajo}
+            onBlur={handleBlur}
           />
           
         </Grid>

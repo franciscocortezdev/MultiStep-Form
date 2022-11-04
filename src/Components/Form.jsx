@@ -32,15 +32,15 @@ export default function Form() {
 
   
 
-  function getStepContent(step, values, handleChange, handleSubmit) {
-    console.log('values', values)
+  function getStepContent(step, values, handleChange, handleSubmit, errors, touched, handleBlur) {
+   
     switch (step) {
       case 0:
-        return <FormDPersonales values={values} handleChange={handleChange} handleSubmit={handleSubmit}/>;
+        return <FormDPersonales values={values} handleChange={handleChange} handleSubmit={handleSubmit} errors={errors} touched={touched} handleBlur={handleBlur}/>;
       case 1:
-        return <FormContacto values={values} handleChange={handleChange} handleSubmit={handleSubmit}/>;
+        return <FormContacto values={values} handleChange={handleChange} handleSubmit={handleSubmit} errors={errors} touched={touched}/>;
       case 2:
-        return <FormInfoLaboral values={values} handleChange={handleChange} handleSubmit={handleSubmit}/>;
+        return <FormInfoLaboral values={values} handleChange={handleChange} handleSubmit={handleSubmit} errors={errors} touched={touched}/>;
       default:
         throw new Error('Unknown step');
     }
@@ -61,25 +61,34 @@ export default function Form() {
     },
     validate: (values) => {
       const errors = {};
-    //   if (!values.email) {
-    //     errors.email = 'Requerido';
+      if (!values.Nombre) {
+        errors.Nombre = 'El nombre es requerido';
                   
-    //   }
-    //   if (values.modulo === null) {
-    //    errors.modulo = 'Debe elegir un modulo';
+      }
+      if (!values.Edad){
+        errors.Edad = 'Fecha de nacimiento requerida'
+      }
 
-    //  }
+      if(!values.Telefono){
+        errors.Telefono = 'Telefono requerido'
+      }
+
+      if(!values.Profesion){
+        errors.Profesion = 'Profesion requerida'
+      }
+     
       return errors;
     },
     onSubmit: (values) => {
-      console.log(values)
-
+      if (activeStep === 2){
+        console.log('enviado')
+      }else{
+        handleNext()
+      }
     }
   })
 
-  const handleFinish = () =>{
-    console.log('finish', Formulario.values)
-  }
+  
 
   return (
     <>
@@ -99,8 +108,9 @@ export default function Form() {
             ))}
           </Stepper>
           
-          
-              {getStepContent(activeStep, Formulario.values, Formulario.handleChange, Formulario.handleSubmit)}
+              <form onSubmit={Formulario.handleSubmit}>
+
+              {getStepContent(activeStep, Formulario.values, Formulario.handleChange, Formulario.handleSubmit, Formulario.errors, Formulario.touched, Formulario.handleBlur)}
 
 
 
@@ -116,16 +126,16 @@ export default function Form() {
                   ? (
                     <Button
                       variant="contained"
-                      onClick={handleFinish}
+                      onClick={Formulario.handleSubmit}
                       sx={{ mt: 3, ml: 1 }}
                     >
-                      Registrar usuario
+                      Registrar
                     </Button>
                   )
                   : (
                     <Button
                       variant="contained"
-                      onClick={handleNext}
+                      onClick={Formulario.handleSubmit}
                       sx={{ mt: 3, ml: 1 }}
                     >
                       Siguiente
@@ -135,7 +145,7 @@ export default function Form() {
 
               </Box>
            
-        
+              </form>
         </Paper>
   
       </Container>
