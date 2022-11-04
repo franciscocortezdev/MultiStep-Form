@@ -1,8 +1,8 @@
 import React from 'react'
-import {Typography, Grid, TextField} from '@mui/material';
+import { Grid, TextField} from '@mui/material';
 
 
-export default function FormInfoLaboral() {
+export default function FormInfoLaboral({values, handleChange, handleSubmit}) {
 
 
 
@@ -17,6 +17,8 @@ export default function FormInfoLaboral() {
             label="Profesion"
             fullWidth
             variant="standard"
+            value={values.Profesion}
+            onChange={handleChange}
           />
           
         </Grid>
@@ -28,6 +30,8 @@ export default function FormInfoLaboral() {
             fullWidth
             variant="standard"
             type='number'
+            value={values.TelefonoTrabajo}
+            onChange={handleChange}
           />
           
         </Grid>
@@ -38,7 +42,8 @@ export default function FormInfoLaboral() {
             label="Direccion del trabajo"
             fullWidth
             variant="standard"
-  
+            value={values.DireccionTrabajo}
+            onChange={handleChange}
           />
           
         </Grid>

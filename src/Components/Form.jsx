@@ -30,13 +30,7 @@ export default function Form() {
     setActiveStep(activeStep - 1);
   };
 
-  const handleFinish = () =>{
-    console.log('finish')
-  }
-
-
   
-
 
   function getStepContent(step, values, handleChange, handleSubmit) {
     console.log('values', values)
@@ -55,14 +49,15 @@ export default function Form() {
 
   const Formulario = useFormik({
     initialValues: { 
-      firstName: '',
-      lastName: '',
-      address1: '',
-      address2: '', 
-      city: '',
-      state:'',
-      zip: '',
-      country:''
+      Nombre: '',
+      Apellido: '',
+      Direccion: '',
+      Edad: '', 
+      Telefono: '',
+      Correo:'',
+      Profesion: '',
+      TelefonoTrabajo: '',
+      DireccionTrabajo: ''
     },
     validate: (values) => {
       const errors = {};
@@ -82,6 +77,10 @@ export default function Form() {
     }
   })
 
+  const handleFinish = () =>{
+    console.log('finish', Formulario.values)
+  }
+
   return (
     <>
 
@@ -100,8 +99,9 @@ export default function Form() {
             ))}
           </Stepper>
           
-            
+          
               {getStepContent(activeStep, Formulario.values, Formulario.handleChange, Formulario.handleSubmit)}
+
 
 
               <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>

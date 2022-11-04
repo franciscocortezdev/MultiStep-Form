@@ -3,7 +3,7 @@ import { Grid, TextField} from '@mui/material';
 
 
 
-export default function FormContacto() {
+export default function FormContacto({values, handleChange, handleSubmit}) {
   return (
     <>
 
@@ -16,6 +16,8 @@ export default function FormContacto() {
             fullWidth
             variant="standard"
             type="number"
+            value={values.Telefono}
+            onChange={handleChange}
           />
         </Grid>
         <Grid item xs={12}>
@@ -24,6 +26,8 @@ export default function FormContacto() {
             name='Correo'
             fullWidth
             variant="standard"
+            value={values.Correo}
+            onChange={handleChange}
           />
         </Grid>
         

@@ -45,7 +45,7 @@ export default function FormDPersonales({values, handleChange, handleSubmit}) {
           />
         </Grid>
         <Grid item xs={12}>
-          <InputLabel >Edad</InputLabel>
+          <InputLabel >Fecha de Nacimiento</InputLabel>
           <TextField
             name="Edad"
             fullWidth
