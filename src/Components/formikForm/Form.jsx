@@ -1,14 +1,14 @@
-import React, {useState} from 'react'
+import React, { useState } from 'react'
 import {
-  Typography, 
-  Container, 
-  Paper, 
-  Stepper, 
+  Typography,
+  Container,
+  Paper,
+  Stepper,
   Step,
   StepLabel,
   Box,
   Button
-  
+
 } from '@mui/material';
 import FormDPersonales from './FormDPersonales';
 import FormContacto from './FormContacto';
@@ -18,9 +18,9 @@ import { useFormik } from 'formik';
 
 export default function Form() {
   const [activeStep, setActiveStep] = useState(0);
- 
+
   const steps = ['Datos personales', 'Informacion de contacto', 'Informacion laboral'];
-  
+
 
   const handleNext = () => {
     setActiveStep(activeStep + 1);
@@ -30,32 +30,32 @@ export default function Form() {
     setActiveStep(activeStep - 1);
   };
 
-  
+
 
   function getStepContent(step, values, handleChange, handleSubmit, errors, touched, handleBlur, setFieldValue, setFieldTouched) {
-   
+
     switch (step) {
       case 0:
-        return <FormDPersonales 
-        values={values} handleChange={handleChange} 
-        handleSubmit={handleSubmit} errors={errors} 
-        touched={touched} handleBlur={handleBlur}
-        setFieldValue={setFieldValue}
-        setFieldTouched={setFieldTouched}
+        return <FormDPersonales
+          values={values} handleChange={handleChange}
+          handleSubmit={handleSubmit} errors={errors}
+          touched={touched} handleBlur={handleBlur}
+          setFieldValue={setFieldValue}
+          setFieldTouched={setFieldTouched}
         />
       case 1:
-        return <FormContacto values={values} handleChange={handleChange} 
-        handleSubmit={handleSubmit} errors={errors} 
-        touched={touched} handleBlur={handleBlur}
-        setFieldValue={setFieldValue}
-        setFieldTouched={setFieldTouched}
+        return <FormContacto values={values} handleChange={handleChange}
+          handleSubmit={handleSubmit} errors={errors}
+          touched={touched} handleBlur={handleBlur}
+          setFieldValue={setFieldValue}
+          setFieldTouched={setFieldTouched}
         />
       case 2:
-        return <FormInfoLaboral values={values} handleChange={handleChange} 
-        handleSubmit={handleSubmit} errors={errors} 
-        touched={touched} handleBlur={handleBlur}
-        setFieldValue={setFieldValue}
-        setFieldTouched={setFieldTouched}
+        return <FormInfoLaboral values={values} handleChange={handleChange}
+          handleSubmit={handleSubmit} errors={errors}
+          touched={touched} handleBlur={handleBlur}
+          setFieldValue={setFieldValue}
+          setFieldTouched={setFieldTouched}
         />
       default:
         throw new Error('Unknown step');
@@ -64,13 +64,13 @@ export default function Form() {
 
 
   const Formulario = useFormik({
-    initialValues: { 
+    initialValues: {
       Nombre: '',
       Apellido: '',
       Direccion: '',
-      Edad: '', 
+      Edad: '',
       Telefono: '',
-      Correo:'',
+      Correo: '',
       Profesion: '',
       TelefonoTrabajo: '',
       DireccionTrabajo: '',
@@ -78,46 +78,46 @@ export default function Form() {
       tieneWhatsapp: false
     },
     validate: (values) => {
-      
+
       const errors = {};
       if (!values.Nombre) {
         errors.Nombre = 'El nombre es requerido';
-                  
+
       }
-      if (!values.Edad){
+      if (!values.Edad) {
         errors.Edad = 'Fecha de nacimiento requerida'
       }
-      if(activeStep === 1){
+      if (activeStep === 1) {
 
-        if(!values.Telefono){
+        if (!values.Telefono) {
           errors.Telefono = 'Telefono requerido'
         }
-  
+
       }
 
-      if(activeStep === 2){
-  
-        if(!values.Profesion){
+      if (activeStep === 2) {
+
+        if (!values.Profesion) {
           errors.Profesion = 'Profesion requerida'
         }
       }
 
-      if(values.estadoCivil === null){
+      if (values.estadoCivil === null) {
         errors.estadoCivil = 'Estado civil requerido'
       }
       return errors;
     },
     onSubmit: (values) => {
-      
-      if (activeStep === 2){
+
+      if (activeStep === 2) {
         //Enviar datos
-      }else{
+      } else {
         handleNext()
       }
     }
   })
 
-  
+
 
   return (
     <>
@@ -136,22 +136,22 @@ export default function Form() {
               </Step>
             ))}
           </Stepper>
-          
-              <form onSubmit={Formulario.handleSubmit}>
 
-              {getStepContent(activeStep, Formulario.values, Formulario.handleChange, Formulario.handleSubmit, Formulario.errors, Formulario.touched, Formulario.handleBlur, Formulario.setFieldValue, Formulario.setFieldTouched)}
+          <form onSubmit={Formulario.handleSubmit}>
+
+            {getStepContent(activeStep, Formulario.values, Formulario.handleChange, Formulario.handleSubmit, Formulario.errors, Formulario.touched, Formulario.handleBlur, Formulario.setFieldValue, Formulario.setFieldTouched)}
 
 
 
-              <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
-                {activeStep !== 0 && (
-                  <Button onClick={handleBack} sx={{ mt: 3, ml: 1 }}>
-                    Regresar
-                  </Button>
-                )}
+            <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
+              {activeStep !== 0 && (
+                <Button onClick={handleBack} sx={{ mt: 3, ml: 1 }}>
+                  Regresar
+                </Button>
+              )}
 
-                {
-                  activeStep === steps.length - 1 
+              {
+                activeStep === steps.length - 1
                   ? (
                     <Button
                       variant="contained"
@@ -170,17 +170,17 @@ export default function Form() {
                       Siguiente
                     </Button>
                   )
-                }
+              }
 
-              </Box>
-           
-              </form>
+            </Box>
+
+          </form>
         </Paper>
-  
+
       </Container>
 
-    
-    
+
+
     </>
 
   )
