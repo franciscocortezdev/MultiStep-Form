@@ -1,11 +1,9 @@
 import React from 'react'
-import { Grid, TextField, InputLabel, FormHelperText} from '@mui/material'
+import { Grid, TextField, InputLabel, FormHelperText } from '@mui/material'
 import Select from 'react-select'
 
 
-
-
-export default function FormDPersonales({values, handleChange, errors, touched, handleBlur, setFieldValue,setFieldTouched}) {
+export default function FormDPersonales({ values, handleChange, errors, touched, handleBlur, setFieldValue, setFieldTouched }) {
 
   const estadosCiviles = [
     {
@@ -23,7 +21,7 @@ export default function FormDPersonales({values, handleChange, errors, touched, 
   ]
   return (
     <>
-    
+
       <Grid container spacing={4}>
         <Grid item xs={12} sm={6}>
           <TextField
@@ -40,7 +38,7 @@ export default function FormDPersonales({values, handleChange, errors, touched, 
         </Grid>
         <Grid item xs={12} sm={6}>
           <TextField
-            
+
             name="Apellido"
             label="Apellido"
             fullWidth
@@ -54,7 +52,7 @@ export default function FormDPersonales({values, handleChange, errors, touched, 
         </Grid>
         <Grid item xs={12}>
           <TextField
-            
+
             name="Direccion"
             label="Direccion"
             fullWidth
@@ -83,28 +81,28 @@ export default function FormDPersonales({values, handleChange, errors, touched, 
         <Grid item xs={12}>
           <InputLabel >Estado civil</InputLabel>
           <Select
-          placeholder={'Seleccione su estado civil'}
-          options={estadosCiviles}
-          getOptionValue={option => option.id}
-          getOptionLabel={option => option.label}
-          value = {
-            estadosCiviles.filter(opt => opt.id === values.estadoCivil)
-          }
-          onChange={m=>{
-            setFieldValue('estadoCivil', m.id)
-          }}
-          onBlur={()=>{
-            setFieldTouched('estadoCivil');
-          }}
-          styles={{
-            control: (provided, state) => ( errors.estadoCivil && touched.estadoCivil ? { ...provided, borderColor: 'red'}
-            : provided )
-          }}
-        />
-        {errors.estadoCivil && touched.estadoCivil && <FormHelperText error={true}>{errors.estadoCivil}</FormHelperText>}
+            placeholder={'Seleccione su estado civil'}
+            options={estadosCiviles}
+            getOptionValue={option => option.id}
+            getOptionLabel={option => option.label}
+            value={
+              estadosCiviles.filter(opt => opt.id === values.estadoCivil)
+            }
+            onChange={m => {
+              setFieldValue('estadoCivil', m.id)
+            }}
+            onBlur={() => {
+              setFieldTouched('estadoCivil');
+            }}
+            styles={{
+              control: (provided, state) => (errors.estadoCivil && touched.estadoCivil ? { ...provided, borderColor: 'red' }
+                : provided)
+            }}
+          />
+          {errors.estadoCivil && touched.estadoCivil && <FormHelperText error={true}>{errors.estadoCivil}</FormHelperText>}
         </Grid>
-       
-        
+
+
       </Grid>
 
     </>
