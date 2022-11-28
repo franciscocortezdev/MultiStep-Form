@@ -1,10 +1,8 @@
 import React from 'react'
-import { Grid, TextField} from '@mui/material';
+import { Grid, TextField } from '@mui/material';
 
 
-export default function FormInfoLaboral({values, handleChange, errors, touched, handleBlur, setFieldValue,setFieldTouched}) {
-
-
+export default function FormInfoLaboral({ values, handleChange, errors, touched, handleBlur, setFieldValue, setFieldTouched }) {
 
 
   return (
@@ -23,9 +21,9 @@ export default function FormInfoLaboral({values, handleChange, errors, touched, 
             helperText={touched.Profesion && errors.Profesion}
             onBlur={handleBlur}
           />
-          
+
         </Grid>
-        
+
         <Grid item xs={12} sm={6}>
           <TextField
             name='TelefonoTrabajo'
@@ -39,7 +37,7 @@ export default function FormInfoLaboral({values, handleChange, errors, touched, 
             helperText={touched.TelefonoTrabajo && errors.TelefonoTrabajo}
             onBlur={handleBlur}
           />
-          
+
         </Grid>
 
         <Grid item xs={12}>
@@ -54,9 +52,9 @@ export default function FormInfoLaboral({values, handleChange, errors, touched, 
             helperText={touched.DireccionTrabajo && errors.DireccionTrabajo}
             onBlur={handleBlur}
           />
-          
+
         </Grid>
-        
+
       </Grid>
     </>
   )
