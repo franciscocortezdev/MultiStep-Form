@@ -1,29 +1,30 @@
-import React from 'react'
-import { Grid, TextField, InputLabel, FormHelperText } from '@mui/material'
-import Select from 'react-select'
+import React from "react";
+import { Grid, TextField, InputLabel, FormHelperText } from "@mui/material";
+import Select from "react-select";
 
-
-export default function FormDPersonales() {
-
+export default function FormDPersonales({
+  register,
+  setValue,
+  getValues,
+  errors,
+}) {
   const estadosCiviles = [
     {
       id: 1,
-      label: 'Soltero'
+      label: "Soltero",
     },
     {
       id: 2,
-      label: 'Casado'
+      label: "Casado",
     },
     {
       id: 3,
-      label: 'Divorciado'
-    }
-  ]
+      label: "Divorciado",
+    },
+  ];
 
   return (
-
     <>
-
       <Grid container spacing={4}>
         <Grid item xs={12} sm={6}>
           <TextField
@@ -31,86 +32,76 @@ export default function FormDPersonales() {
             label="Nombre"
             fullWidth
             variant="standard"
-            value={values.Nombre}
-            onChange={handleChange}
-            error={touched.Nombre && Boolean(errors.Nombre)}
-            helperText={touched.Nombre && errors.Nombre}
-            onBlur={handleBlur}
+            {...register("Nombre", { required: true })}
+            error={Boolean(errors.Nombre)}
+            helperText={Boolean(errors.Nombre) && "El nombre es requerido"}
+            // onBlur={handleBlur}
           />
         </Grid>
         <Grid item xs={12} sm={6}>
           <TextField
-
             name="Apellido"
             label="Apellido"
             fullWidth
             variant="standard"
-            value={values.Apellido}
-            onChange={handleChange}
-            error={touched.Apellido && Boolean(errors.Apellido)}
-            helperText={touched.Apellido && errors.Apellido}
-            onBlur={handleBlur}
+            {...register("Apellido")}
           />
         </Grid>
         <Grid item xs={12}>
           <TextField
-
             name="Direccion"
             label="Direccion"
             fullWidth
             variant="standard"
-            value={values.Direccion}
-            onChange={handleChange}
-            error={touched.Direccion && Boolean(errors.Direccion)}
-            helperText={touched.Direccion && errors.Direccion}
-            onBlur={handleBlur}
+            {...register("Direccion")}
           />
         </Grid>
         <Grid item xs={12}>
-          <InputLabel >Fecha de Nacimiento</InputLabel>
+          <InputLabel>Fecha de Nacimiento</InputLabel>
           <TextField
             name="Edad"
             fullWidth
             variant="standard"
-            value={values.Edad}
-            onChange={handleChange}
-            type='date'
-            error={touched.Edad && Boolean(errors.Edad)}
-            helperText={touched.Edad && errors.Edad}
-            onBlur={handleBlur}
+            type="date"
+            {...register("Edad", { required: true })}
+            error={Boolean(errors.Edad)}
+            helperText={
+              Boolean(errors.Nombre) && "La fecha de nacimiento es requerida"
+            }
+            // onBlur={handleBlur}
           />
         </Grid>
         <Grid item xs={12}>
-          <InputLabel >Estado civil</InputLabel>
+          <InputLabel>Estado civil</InputLabel>
           <Select
-            placeholder={'Seleccione su estado civil'}
+            placeholder={"Seleccione su estado civil"}
             options={estadosCiviles}
-            getOptionValue={option => option.id}
-            getOptionLabel={option => option.label}
-            value={
-              estadosCiviles.filter(opt => opt.id === values.estadoCivil)
-            }
-            onChange={m => {
-              setFieldValue('estadoCivil', m.id)
+            getOptionValue={(option) => option.id}
+            getOptionLabel={(option) => option.label}
+            {...register("estadoCivil", { required: true })}
+            value={estadosCiviles.filter(
+              (opt) => opt.id === getValues("estadoCivil")
+            )}
+            onChange={(m) => {
+              setValue("estadoCivil", m.id, { shouldValidate: true });
             }}
-            onBlur={() => {
-              setFieldTouched('estadoCivil');
-            }}
+            // onBlur={() => {
+            //   setFieldTouched('estadoCivil');
+            // }}
             styles={{
-              control: (provided, state) => (errors.estadoCivil && touched.estadoCivil ? { ...provided, borderColor: 'red' }
-                : provided)
+              control: (provided, state) =>
+                Boolean(errors.estadoCivil)
+                  ? { ...provided, borderColor: "red" }
+                  : provided,
             }}
           />
-          {errors.estadoCivil && touched.estadoCivil && <FormHelperText error={true}>{errors.estadoCivil}</FormHelperText>}
+          {Boolean(errors.estadoCivil) && (
+            <FormHelperText error={true}>
+              El estado civil es requerido
+            </FormHelperText>
+          )}
         </Grid>
-
-
       </Grid>
-
     </>
-
-
-
-
-  )
+  );
 }

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState } from "react";
 import {
   Typography,
   Container,
@@ -7,20 +7,21 @@ import {
   Step,
   StepLabel,
   Box,
-  Button
-
-} from '@mui/material';
-import FormDPersonales from './FormDPersonales';
-import FormContacto from './FormContacto';
-import FormInfoLaboral from './FormInfoLaboral';
-import { useFormik } from 'formik';
-
+  Button,
+} from "@mui/material";
+import FormDPersonales from "./FormDPersonales";
+import FormContacto from "./FormContacto";
+import FormInfoLaboral from "./FormInfoLaboral";
+import { useFormik } from "formik";
 
 export default function Form() {
   const [activeStep, setActiveStep] = useState(0);
 
-  const steps = ['Datos personales', 'Informacion de contacto', 'Informacion laboral'];
-
+  const steps = [
+    "Datos personales",
+    "Informacion de contacto",
+    "Informacion laboral",
+  ];
 
   const handleNext = () => {
     setActiveStep(activeStep + 1);
@@ -30,102 +31,118 @@ export default function Form() {
     setActiveStep(activeStep - 1);
   };
 
-
-
-  function getStepContent(step, values, handleChange, handleSubmit, errors, touched, handleBlur, setFieldValue, setFieldTouched) {
-
+  function getStepContent(
+    step,
+    values,
+    handleChange,
+    handleSubmit,
+    errors,
+    touched,
+    handleBlur,
+    setFieldValue,
+    setFieldTouched
+  ) {
     switch (step) {
       case 0:
-        return <FormDPersonales
-          values={values} handleChange={handleChange}
-          handleSubmit={handleSubmit} errors={errors}
-          touched={touched} handleBlur={handleBlur}
-          setFieldValue={setFieldValue}
-          setFieldTouched={setFieldTouched}
-        />
+        return (
+          <FormDPersonales
+            values={values}
+            handleChange={handleChange}
+            handleSubmit={handleSubmit}
+            errors={errors}
+            touched={touched}
+            handleBlur={handleBlur}
+            setFieldValue={setFieldValue}
+            setFieldTouched={setFieldTouched}
+          />
+        );
       case 1:
-        return <FormContacto values={values} handleChange={handleChange}
-          handleSubmit={handleSubmit} errors={errors}
-          touched={touched} handleBlur={handleBlur}
-          setFieldValue={setFieldValue}
-          setFieldTouched={setFieldTouched}
-        />
+        return (
+          <FormContacto
+            values={values}
+            handleChange={handleChange}
+            handleSubmit={handleSubmit}
+            errors={errors}
+            touched={touched}
+            handleBlur={handleBlur}
+            setFieldValue={setFieldValue}
+            setFieldTouched={setFieldTouched}
+          />
+        );
       case 2:
-        return <FormInfoLaboral values={values} handleChange={handleChange}
-          handleSubmit={handleSubmit} errors={errors}
-          touched={touched} handleBlur={handleBlur}
-          setFieldValue={setFieldValue}
-          setFieldTouched={setFieldTouched}
-        />
+        return (
+          <FormInfoLaboral
+            values={values}
+            handleChange={handleChange}
+            handleSubmit={handleSubmit}
+            errors={errors}
+            touched={touched}
+            handleBlur={handleBlur}
+            setFieldValue={setFieldValue}
+            setFieldTouched={setFieldTouched}
+          />
+        );
       default:
-        throw new Error('Unknown step');
+        throw new Error("Unknown step");
     }
   }
 
-
   const Formulario = useFormik({
     initialValues: {
-      Nombre: '',
-      Apellido: '',
-      Direccion: '',
-      Edad: '',
-      Telefono: '',
-      Correo: '',
-      Profesion: '',
-      TelefonoTrabajo: '',
-      DireccionTrabajo: '',
+      Nombre: "",
+      Apellido: "",
+      Direccion: "",
+      Edad: "",
+      Telefono: "",
+      Correo: "",
+      Profesion: "",
+      TelefonoTrabajo: "",
+      DireccionTrabajo: "",
       estadoCivil: null,
-      tieneWhatsapp: false
+      tieneWhatsapp: false,
     },
     validate: (values) => {
-
       const errors = {};
       if (!values.Nombre) {
-        errors.Nombre = 'El nombre es requerido';
-
+        errors.Nombre = "El nombre es requerido";
       }
       if (!values.Edad) {
-        errors.Edad = 'Fecha de nacimiento requerida'
+        errors.Edad = "Fecha de nacimiento requerida";
       }
+      if (values.estadoCivil === null) {
+        errors.estadoCivil = "Estado civil requerido";
+      }
+
       if (activeStep === 1) {
-
         if (!values.Telefono) {
-          errors.Telefono = 'Telefono requerido'
+          errors.Telefono = "Telefono requerido";
         }
-
       }
 
       if (activeStep === 2) {
-
         if (!values.Profesion) {
-          errors.Profesion = 'Profesion requerida'
+          errors.Profesion = "Profesion requerida";
         }
       }
 
-      if (values.estadoCivil === null) {
-        errors.estadoCivil = 'Estado civil requerido'
-      }
       return errors;
     },
     onSubmit: (values) => {
-
       if (activeStep === 2) {
         //Enviar datos
       } else {
-        handleNext()
+        handleNext();
       }
-    }
-  })
-
-
+    },
+  });
 
   return (
     <>
-
-
       <Container component="main" maxWidth="sm" sx={{ mb: 4 }}>
-        <Paper variant="outlined" sx={{ my: { xs: 3, md: 6 }, p: { xs: 2, md: 3 } }}>
-
+        <Paper
+          variant="outlined"
+          sx={{ my: { xs: 3, md: 6 }, p: { xs: 2, md: 3 } }}
+        >
           <Typography component="h1" variant="h4" align="center">
             Registro de usuario
           </Typography>
@@ -138,50 +155,46 @@ export default function Form() {
           </Stepper>
 
           <form onSubmit={Formulario.handleSubmit}>
+            {getStepContent(
+              activeStep,
+              Formulario.values,
+              Formulario.handleChange,
+              Formulario.handleSubmit,
+              Formulario.errors,
+              Formulario.touched,
+              Formulario.handleBlur,
+              Formulario.setFieldValue,
+              Formulario.setFieldTouched
+            )}
 
-            {getStepContent(activeStep, Formulario.values, Formulario.handleChange, Formulario.handleSubmit, Formulario.errors, Formulario.touched, Formulario.handleBlur, Formulario.setFieldValue, Formulario.setFieldTouched)}
-
-
-
-            <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
+            <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
               {activeStep !== 0 && (
                 <Button onClick={handleBack} sx={{ mt: 3, ml: 1 }}>
                   Regresar
                 </Button>
               )}
 
-              {
-                activeStep === steps.length - 1
-                  ? (
-                    <Button
-                      variant="contained"
-                      onClick={Formulario.handleSubmit}
-                      sx={{ mt: 3, ml: 1 }}
-                    >
-                      Registrar
-                    </Button>
-                  )
-                  : (
-                    <Button
-                      variant="contained"
-                      onClick={Formulario.handleSubmit}
-                      sx={{ mt: 3, ml: 1 }}
-                    >
-                      Siguiente
-                    </Button>
-                  )
-              }
-
+              {activeStep === steps.length - 1 ? (
+                <Button
+                  variant="contained"
+                  onClick={Formulario.handleSubmit}
+                  sx={{ mt: 3, ml: 1 }}
+                >
+                  Registrar
+                </Button>
+              ) : (
+                <Button
+                  variant="contained"
+                  onClick={Formulario.handleSubmit}
+                  sx={{ mt: 3, ml: 1 }}
+                >
+                  Siguiente
+                </Button>
+              )}
             </Box>
-
           </form>
         </Paper>
-
       </Container>
-
-
-
     </>
-
-  )
+  );
 }
