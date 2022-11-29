@@ -7,6 +7,7 @@ export default function FormDPersonales({
   setValue,
   getValues,
   errors,
+  trigger,
 }) {
   const estadosCiviles = [
     {
@@ -35,7 +36,6 @@ export default function FormDPersonales({
             {...register("Nombre", { required: true })}
             error={Boolean(errors.Nombre)}
             helperText={Boolean(errors.Nombre) && "El nombre es requerido"}
-            // onBlur={handleBlur}
           />
         </Grid>
         <Grid item xs={12} sm={6}>
@@ -66,9 +66,8 @@ export default function FormDPersonales({
             {...register("Edad", { required: true })}
             error={Boolean(errors.Edad)}
             helperText={
-              Boolean(errors.Nombre) && "La fecha de nacimiento es requerida"
+              Boolean(errors.Edad) && "La fecha de nacimiento es requerida"
             }
-            // onBlur={handleBlur}
           />
         </Grid>
         <Grid item xs={12}>
@@ -85,13 +84,18 @@ export default function FormDPersonales({
             onChange={(m) => {
               setValue("estadoCivil", m.id, { shouldValidate: true });
             }}
-            // onBlur={() => {
-            //   setFieldTouched('estadoCivil');
-            // }}
+            onBlur={() => {
+              trigger("estadoCivil");
+            }}
             styles={{
               control: (provided, state) =>
                 Boolean(errors.estadoCivil)
-                  ? { ...provided, borderColor: "red" }
+                  ? {
+                      ...provided,
+                      borderColor: "red",
+                      boxShadow: "0 0 0 1px red",
+                      "&:hover": { borderColor: "red" },
+                    }
                   : provided,
             }}
           />

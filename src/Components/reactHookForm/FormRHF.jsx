@@ -21,8 +21,10 @@ export default function FormRHF() {
     handleSubmit,
     setValue,
     getValues,
+    trigger,
     formState: { errors },
   } = useForm({
+    mode: "all",
     defaultValues: {
       Nombre: "",
       Apellido: "",
@@ -39,10 +41,12 @@ export default function FormRHF() {
   });
 
   const onSubmit = (data) => {
-    console.log(data);
+    if (activeStep === 2) {
+      console.log(data);
+    } else {
+      handleNext();
+    }
   };
-
-  console.log(getValues("estadoCivil"));
 
   const steps = [
     "Datos personales",
@@ -58,7 +62,14 @@ export default function FormRHF() {
     setActiveStep(activeStep - 1);
   };
 
-  function getStepContent(step, register, setValue, getValues, errors) {
+  function getStepContent(
+    step,
+    register,
+    setValue,
+    getValues,
+    errors,
+    trigger
+  ) {
     switch (step) {
       case 0:
         return (
@@ -67,6 +78,7 @@ export default function FormRHF() {
             setValue={setValue}
             getValues={getValues}
             errors={errors}
+            trigger={trigger}
           />
         );
       case 1:
@@ -97,7 +109,14 @@ export default function FormRHF() {
           </Stepper>
 
           <form>
-            {getStepContent(activeStep, register, setValue, getValues, errors)}
+            {getStepContent(
+              activeStep,
+              register,
+              setValue,
+              getValues,
+              errors,
+              trigger
+            )}
 
             <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
               {activeStep !== 0 && (
