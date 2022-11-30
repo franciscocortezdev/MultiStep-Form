@@ -7,6 +7,7 @@ export default function FormContacto({
   getValues,
   errors,
   trigger,
+  watch,
 }) {
   return (
     <>
@@ -25,7 +26,10 @@ export default function FormContacto({
         </Grid>
         <Grid item xs={12} md={6}>
           <InputLabel>¿Tiene Whatsapp?</InputLabel>
-          <Switch {...register("tieneWhatsapp")} />
+          <Switch
+            {...register("tieneWhatsapp")}
+            checked={watch("tieneWhatsapp")}
+          />
         </Grid>
         <Grid item xs={12}>
           <TextField

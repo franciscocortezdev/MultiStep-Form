@@ -21,6 +21,7 @@ export default function FormRHF() {
     handleSubmit,
     setValue,
     getValues,
+    watch,
     trigger,
     formState: { errors },
   } = useForm({
@@ -40,6 +41,7 @@ export default function FormRHF() {
     },
   });
 
+  console.log(watch("tieneWhatsapp"));
   const onSubmit = (data) => {
     if (activeStep === 2) {
       console.log(data);
@@ -68,7 +70,8 @@ export default function FormRHF() {
     setValue,
     getValues,
     errors,
-    trigger
+    trigger,
+    watch
   ) {
     switch (step) {
       case 0:
@@ -89,6 +92,7 @@ export default function FormRHF() {
             getValues={getValues}
             errors={errors}
             trigger={trigger}
+            watch={watch}
           />
         );
       case 2:
@@ -131,7 +135,8 @@ export default function FormRHF() {
               setValue,
               getValues,
               errors,
-              trigger
+              trigger,
+              watch
             )}
 
             <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
