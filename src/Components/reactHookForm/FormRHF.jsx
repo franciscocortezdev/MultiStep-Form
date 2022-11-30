@@ -41,10 +41,9 @@ export default function FormRHF() {
     },
   });
 
-  console.log(watch("tieneWhatsapp"));
   const onSubmit = (data) => {
     if (activeStep === 2) {
-      console.log(data);
+      //Enviar datos
     } else {
       handleNext();
     }
@@ -119,6 +118,9 @@ export default function FormRHF() {
         >
           <Typography component="h1" variant="h4" align="center">
             Registro de usuario
+          </Typography>
+          <Typography component="h6" variant="h6" align="center">
+            React Hook Form
           </Typography>
           <Stepper activeStep={activeStep} sx={{ pt: 3, pb: 5 }}>
             {steps.map((label) => (

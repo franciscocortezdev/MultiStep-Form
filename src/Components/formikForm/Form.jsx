@@ -146,6 +146,9 @@ export default function Form() {
           <Typography component="h1" variant="h4" align="center">
             Registro de usuario
           </Typography>
+          <Typography component="h6" variant="h6" align="center">
+            Formik
+          </Typography>
           <Stepper activeStep={activeStep} sx={{ pt: 3, pb: 5 }}>
             {steps.map((label) => (
               <Step key={label}>
