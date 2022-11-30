@@ -82,9 +82,25 @@ export default function FormRHF() {
           />
         );
       case 1:
-        return <FormContacto register={register} />;
+        return (
+          <FormContacto
+            register={register}
+            setValue={setValue}
+            getValues={getValues}
+            errors={errors}
+            trigger={trigger}
+          />
+        );
       case 2:
-        return <FormInfoLaboral register={register} />;
+        return (
+          <FormInfoLaboral
+            register={register}
+            setValue={setValue}
+            getValues={getValues}
+            errors={errors}
+            trigger={trigger}
+          />
+        );
       default:
         throw new Error("Unknown step");
     }
@@ -129,7 +145,7 @@ export default function FormRHF() {
                 <Button
                   variant="contained"
                   sx={{ mt: 3, ml: 1 }}
-                  onClick={handleBack}
+                  onClick={handleSubmit(onSubmit)}
                 >
                   Registrar
                 </Button>
