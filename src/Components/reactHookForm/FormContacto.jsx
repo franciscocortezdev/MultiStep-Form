@@ -1,55 +1,42 @@
-import React from 'react'
-import { Grid, TextField, Switch, InputLabel } from '@mui/material';
+import React from "react";
+import { Grid, TextField, Switch, InputLabel } from "@mui/material";
 
-export default function FormContacto() {
+export default function FormContacto({
+  register,
+  setValue,
+  getValues,
+  errors,
+  trigger,
+}) {
   return (
-
     <>
-
       <Grid container spacing={3}>
-
         <Grid item xs={12} md={6}>
           <TextField
-            name='Telefono'
+            name="Telefono"
             label="Telefono"
             fullWidth
             variant="standard"
             type="number"
-          // value={values.Telefono}
-          // onChange={handleChange}
-          // error={touched.Telefono && Boolean(errors.Telefono)}
-          // helperText={touched.Telefono && errors.Telefono}
-          // onBlur={handleBlur}
+            {...register("Telefono", { required: true })}
+            error={Boolean(errors.Telefono)}
+            helperText={Boolean(errors.Telefono) && "El telefono es requerido"}
           />
         </Grid>
         <Grid item xs={12} md={6}>
-          <InputLabel >¿Tiene Whatsapp?</InputLabel>
-          <Switch
-            // checked={values.tieneWhatsapp}
-            onChange={act => {
-              setFieldValue('tieneWhatsapp', act.target.checked)
-            }}
-          />
+          <InputLabel>¿Tiene Whatsapp?</InputLabel>
+          <Switch {...register("tieneWhatsapp")} />
         </Grid>
         <Grid item xs={12}>
           <TextField
             label="Correo"
-            name='Correo'
+            name="Correo"
             fullWidth
             variant="standard"
-          // value={values.Correo}
-          // onChange={handleChange}
-          // error={touched.Correo && Boolean(errors.Correo)}
-          // helperText={touched.Correo && errors.Correo}
-          // onBlur={handleBlur}
-
+            {...register("Correo")}
           />
         </Grid>
-
-
       </Grid>
     </>
-
-
-  )
+  );
 }
