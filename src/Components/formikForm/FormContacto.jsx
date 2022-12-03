@@ -1,17 +1,23 @@
-import React from 'react'
-import { Grid, TextField, Switch, InputLabel} from '@mui/material';
+import React from "react";
+import { Grid, TextField, Switch, InputLabel } from "@mui/material";
 
-
-
-export default function FormContacto({values, handleChange, errors, touched, handleBlur, setFieldValue,setFieldTouched}) {
+export default function FormContacto({
+  Formulario: {
+    values,
+    handleChange,
+    errors,
+    touched,
+    handleBlur,
+    setFieldValue,
+    setFieldTouched,
+  },
+}) {
   return (
     <>
-
       <Grid container spacing={3}>
-
         <Grid item xs={12} md={6}>
           <TextField
-            name='Telefono'
+            name="Telefono"
             label="Telefono"
             fullWidth
             variant="standard"
@@ -24,18 +30,18 @@ export default function FormContacto({values, handleChange, errors, touched, han
           />
         </Grid>
         <Grid item xs={12} md={6}>
-        <InputLabel >¿Tiene Whatsapp?</InputLabel>
-        <Switch 
-        checked={values.tieneWhatsapp} 
-        onChange={act=>{
-          setFieldValue('tieneWhatsapp', act.target.checked)
-        }}
-        />
+          <InputLabel>¿Tiene Whatsapp?</InputLabel>
+          <Switch
+            checked={values.tieneWhatsapp}
+            onChange={(act) => {
+              setFieldValue("tieneWhatsapp", act.target.checked);
+            }}
+          />
         </Grid>
         <Grid item xs={12}>
           <TextField
             label="Correo"
-            name='Correo'
+            name="Correo"
             fullWidth
             variant="standard"
             value={values.Correo}
@@ -43,12 +49,9 @@ export default function FormContacto({values, handleChange, errors, touched, han
             error={touched.Correo && Boolean(errors.Correo)}
             helperText={touched.Correo && errors.Correo}
             onBlur={handleBlur}
-
           />
         </Grid>
-        
-        
       </Grid>
     </>
-  )
+  );
 }
