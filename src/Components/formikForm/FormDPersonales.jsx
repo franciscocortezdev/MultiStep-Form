@@ -1,27 +1,34 @@
-import React from 'react'
-import { Grid, TextField, InputLabel, FormHelperText } from '@mui/material'
-import Select from 'react-select'
+import React from "react";
+import { Grid, TextField, InputLabel, FormHelperText } from "@mui/material";
+import Select from "react-select";
 
-
-export default function FormDPersonales({ values, handleChange, errors, touched, handleBlur, setFieldValue, setFieldTouched }) {
-
+export default function FormDPersonales({
+  Formulario: {
+    values,
+    handleChange,
+    errors,
+    touched,
+    handleBlur,
+    setFieldValue,
+    setFieldTouched,
+  },
+}) {
   const estadosCiviles = [
     {
       id: 1,
-      label: 'Soltero'
+      label: "Soltero",
     },
     {
       id: 2,
-      label: 'Casado'
+      label: "Casado",
     },
     {
       id: 3,
-      label: 'Divorciado'
-    }
-  ]
+      label: "Divorciado",
+    },
+  ];
   return (
     <>
-
       <Grid container spacing={4}>
         <Grid item xs={12} sm={6}>
           <TextField
@@ -38,7 +45,6 @@ export default function FormDPersonales({ values, handleChange, errors, touched,
         </Grid>
         <Grid item xs={12} sm={6}>
           <TextField
-
             name="Apellido"
             label="Apellido"
             fullWidth
@@ -52,7 +58,6 @@ export default function FormDPersonales({ values, handleChange, errors, touched,
         </Grid>
         <Grid item xs={12}>
           <TextField
-
             name="Direccion"
             label="Direccion"
             fullWidth
@@ -65,47 +70,47 @@ export default function FormDPersonales({ values, handleChange, errors, touched,
           />
         </Grid>
         <Grid item xs={12}>
-          <InputLabel >Fecha de Nacimiento</InputLabel>
+          <InputLabel>Fecha de Nacimiento</InputLabel>
           <TextField
             name="Edad"
             fullWidth
             variant="standard"
             value={values.Edad}
             onChange={handleChange}
-            type='date'
+            type="date"
             error={touched.Edad && Boolean(errors.Edad)}
             helperText={touched.Edad && errors.Edad}
             onBlur={handleBlur}
           />
         </Grid>
         <Grid item xs={12}>
-          <InputLabel >Estado civil</InputLabel>
+          <InputLabel>Estado civil</InputLabel>
           <Select
-            placeholder={'Seleccione su estado civil'}
+            placeholder={"Seleccione su estado civil"}
             options={estadosCiviles}
-            getOptionValue={option => option.id}
-            getOptionLabel={option => option.label}
-            value={
-              estadosCiviles.filter(opt => opt.id === values.estadoCivil)
-            }
-            onChange={m => {
-              setFieldValue('estadoCivil', m.id)
+            getOptionValue={(option) => option.id}
+            getOptionLabel={(option) => option.label}
+            value={estadosCiviles.filter(
+              (opt) => opt.id === values.estadoCivil
+            )}
+            onChange={(m) => {
+              setFieldValue("estadoCivil", m.id);
             }}
             onBlur={() => {
-              setFieldTouched('estadoCivil');
+              setFieldTouched("estadoCivil");
             }}
             styles={{
-              control: (provided, state) => (errors.estadoCivil && touched.estadoCivil ? { ...provided, borderColor: 'red' }
-                : provided)
+              control: (provided, state) =>
+                errors.estadoCivil && touched.estadoCivil
+                  ? { ...provided, borderColor: "red" }
+                  : provided,
             }}
           />
-          {errors.estadoCivil && touched.estadoCivil && <FormHelperText error={true}>{errors.estadoCivil}</FormHelperText>}
+          {errors.estadoCivil && touched.estadoCivil && (
+            <FormHelperText error={true}>{errors.estadoCivil}</FormHelperText>
+          )}
         </Grid>
-
-
       </Grid>
-
     </>
-
-  )
+  );
 }
