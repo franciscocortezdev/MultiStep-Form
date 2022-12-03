@@ -31,57 +31,14 @@ export default function Form() {
     setActiveStep(activeStep - 1);
   };
 
-  function getStepContent(
-    step,
-    values,
-    handleChange,
-    handleSubmit,
-    errors,
-    touched,
-    handleBlur,
-    setFieldValue,
-    setFieldTouched
-  ) {
+  function getStepContent(step, Formulario) {
     switch (step) {
       case 0:
-        return (
-          <FormDPersonales
-            values={values}
-            handleChange={handleChange}
-            handleSubmit={handleSubmit}
-            errors={errors}
-            touched={touched}
-            handleBlur={handleBlur}
-            setFieldValue={setFieldValue}
-            setFieldTouched={setFieldTouched}
-          />
-        );
+        return <FormDPersonales Formulario={Formulario} />;
       case 1:
-        return (
-          <FormContacto
-            values={values}
-            handleChange={handleChange}
-            handleSubmit={handleSubmit}
-            errors={errors}
-            touched={touched}
-            handleBlur={handleBlur}
-            setFieldValue={setFieldValue}
-            setFieldTouched={setFieldTouched}
-          />
-        );
+        return <FormContacto Formulario={Formulario} />;
       case 2:
-        return (
-          <FormInfoLaboral
-            values={values}
-            handleChange={handleChange}
-            handleSubmit={handleSubmit}
-            errors={errors}
-            touched={touched}
-            handleBlur={handleBlur}
-            setFieldValue={setFieldValue}
-            setFieldTouched={setFieldTouched}
-          />
-        );
+        return <FormInfoLaboral Formulario={Formulario} />;
       default:
         throw new Error("Unknown step");
     }
@@ -158,17 +115,7 @@ export default function Form() {
           </Stepper>
 
           <form onSubmit={Formulario.handleSubmit}>
-            {getStepContent(
-              activeStep,
-              Formulario.values,
-              Formulario.handleChange,
-              Formulario.handleSubmit,
-              Formulario.errors,
-              Formulario.touched,
-              Formulario.handleBlur,
-              Formulario.setFieldValue,
-              Formulario.setFieldTouched
-            )}
+            {getStepContent(activeStep, Formulario)}
 
             <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
               {activeStep !== 0 && (
