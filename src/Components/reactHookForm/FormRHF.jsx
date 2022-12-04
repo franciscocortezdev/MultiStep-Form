@@ -16,15 +16,7 @@ import { useForm } from "react-hook-form";
 
 export default function FormRHF() {
   const [activeStep, setActiveStep] = useState(0);
-  const {
-    register,
-    handleSubmit,
-    setValue,
-    getValues,
-    watch,
-    trigger,
-    formState: { errors },
-  } = useForm({
+  const Formulario = useForm({
     mode: "all",
     defaultValues: {
       Nombre: "",
@@ -63,50 +55,11 @@ export default function FormRHF() {
     setActiveStep(activeStep - 1);
   };
 
-  function getStepContent(
-    step,
-    register,
-    setValue,
-    getValues,
-    errors,
-    trigger,
-    watch
-  ) {
-    switch (step) {
-      case 0:
-        return (
-          <FormDPersonales
-            register={register}
-            setValue={setValue}
-            getValues={getValues}
-            errors={errors}
-            trigger={trigger}
-          />
-        );
-      case 1:
-        return (
-          <FormContacto
-            register={register}
-            setValue={setValue}
-            getValues={getValues}
-            errors={errors}
-            trigger={trigger}
-            watch={watch}
-          />
-        );
-      case 2:
-        return (
-          <FormInfoLaboral
-            register={register}
-            setValue={setValue}
-            getValues={getValues}
-            errors={errors}
-            trigger={trigger}
-          />
-        );
-      default:
-        throw new Error("Unknown step");
-    }
+  function getStepContent(step, Formulario) {
+    const steps = [FormDPersonales, FormContacto, FormInfoLaboral];
+    const FormActual = steps[step];
+
+    return <FormActual Formulario={Formulario} />;
   }
 
   return (
@@ -131,15 +84,7 @@ export default function FormRHF() {
           </Stepper>
 
           <form>
-            {getStepContent(
-              activeStep,
-              register,
-              setValue,
-              getValues,
-              errors,
-              trigger,
-              watch
-            )}
+            {getStepContent(activeStep, Formulario)}
 
             <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
               {activeStep !== 0 && (
@@ -152,7 +97,7 @@ export default function FormRHF() {
                 <Button
                   variant="contained"
                   sx={{ mt: 3, ml: 1 }}
-                  onClick={handleSubmit(onSubmit)}
+                  onClick={Formulario.handleSubmit(onSubmit)}
                 >
                   Registrar
                 </Button>
@@ -160,7 +105,7 @@ export default function FormRHF() {
                 <Button
                   variant="contained"
                   sx={{ mt: 3, ml: 1 }}
-                  onClick={handleSubmit(onSubmit)}
+                  onClick={Formulario.handleSubmit(onSubmit)}
                 >
                   Siguiente
                 </Button>
