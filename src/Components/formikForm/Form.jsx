@@ -32,16 +32,10 @@ export default function Form() {
   };
 
   function getStepContent(step, Formulario) {
-    switch (step) {
-      case 0:
-        return <FormDPersonales Formulario={Formulario} />;
-      case 1:
-        return <FormContacto Formulario={Formulario} />;
-      case 2:
-        return <FormInfoLaboral Formulario={Formulario} />;
-      default:
-        throw new Error("Unknown step");
-    }
+    const steps = [FormDPersonales, FormContacto, FormInfoLaboral];
+    const FormActual = steps[step];
+
+    return <FormActual Formulario={Formulario} />;
   }
 
   const Formulario = useFormik({
