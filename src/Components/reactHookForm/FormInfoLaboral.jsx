@@ -2,11 +2,13 @@ import React from "react";
 import { Grid, TextField } from "@mui/material";
 
 export default function FormInfoLaboral({
-  register,
-  setValue,
-  getValues,
-  errors,
-  trigger,
+  Formulario: {
+    register,
+    setValue,
+    getValues,
+    formState: { errors },
+    trigger,
+  },
 }) {
   return (
     <>

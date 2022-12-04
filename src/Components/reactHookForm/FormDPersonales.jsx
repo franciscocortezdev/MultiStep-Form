@@ -3,11 +3,13 @@ import { Grid, TextField, InputLabel, FormHelperText } from "@mui/material";
 import Select from "react-select";
 
 export default function FormDPersonales({
-  register,
-  setValue,
-  getValues,
-  errors,
-  trigger,
+  Formulario: {
+    register,
+    setValue,
+    getValues,
+    formState: { errors },
+    trigger,
+  },
 }) {
   const estadosCiviles = [
     {

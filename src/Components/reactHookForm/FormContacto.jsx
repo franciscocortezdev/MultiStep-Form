@@ -2,12 +2,14 @@ import React from "react";
 import { Grid, TextField, Switch, InputLabel } from "@mui/material";
 
 export default function FormContacto({
-  register,
-  setValue,
-  getValues,
-  errors,
-  trigger,
-  watch,
+  Formulario: {
+    register,
+    setValue,
+    getValues,
+    formState: { errors },
+    trigger,
+    watch,
+  },
 }) {
   return (
     <>
